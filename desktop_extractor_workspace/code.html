@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>EXTRACTOR.SYS | High-Precision UI Data Extraction</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Manrope:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "secondary-dim": "#bb00fc",
+                "primary-fixed": "#00eefc",
+                "surface-tint": "#8ff5ff",
+                "tertiary-dim": "#4aa2f9",
+                "on-primary": "#005d63",
+                "primary-fixed-dim": "#00deec",
+                "primary-container": "#00eefc",
+                "on-surface": "#ffffff",
+                "secondary-container": "#9900cf",
+                "on-error": "#490006",
+                "primary-dim": "#00deec",
+                "primary": "#8ff5ff",
+                "surface-container-low": "#131313",
+                "surface-container-high": "#201f1f",
+                "on-secondary": "#390050",
+                "tertiary-container": "#4aa2f9",
+                "error-container": "#9f0519",
+                "background": "#0e0e0e",
+                "on-primary-container": "#005359",
+                "error": "#ff716c",
+                "inverse-primary": "#006a71",
+                "on-primary-fixed-variant": "#005e64",
+                "secondary": "#d674ff",
+                "tertiary-fixed": "#72b5ff",
+                "secondary-fixed": "#f1c1ff",
+                "on-error-container": "#ffa8a3",
+                "surface-container-lowest": "#000000",
+                "on-secondary-container": "#fff5fc",
+                "secondary-fixed-dim": "#eaaeff",
+                "surface-container-highest": "#262626",
+                "surface-bright": "#2c2c2c",
+                "on-tertiary-container": "#00213e",
+                "tertiary": "#65afff",
+                "on-secondary-fixed": "#580079",
+                "surface-dim": "#0e0e0e",
+                "inverse-surface": "#fcf9f8",
+                "outline": "#767575",
+                "surface-variant": "#262626",
+                "inverse-on-surface": "#565555",
+                "outline-variant": "#484847",
+                "on-tertiary": "#002e52",
+                "tertiary-fixed-dim": "#51a7fe",
+                "on-tertiary-fixed": "#001930",
+                "on-background": "#ffffff",
+                "on-surface-variant": "#adaaaa",
+                "on-tertiary-fixed-variant": "#003b68",
+                "surface": "#0e0e0e",
+                "surface-container": "#1a1919",
+                "on-primary-fixed": "#003f43",
+                "error-dim": "#d7383b",
+                "on-secondary-fixed-variant": "#8400b3"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+            },
+            "fontFamily": {
+                "headline": ["Space Grotesk"],
+                "body": ["Manrope"],
+                "label": ["Manrope"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(38, 38, 38, 0.6);
+            backdrop-filter: blur(20px);
+        }
+        .neon-glow-primary {
+            box-shadow: 0 0 20px rgba(143, 245, 255, 0.15);
+        }
+        .signature-gradient {
+            background: linear-gradient(135deg, #8ff5ff 0%, #d674ff 100%);
+        }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #0e0e0e; }
+        ::-webkit-scrollbar-thumb { background: #262626; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #8ff5ff; }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary selection:text-on-primary-container">
+<!-- TopNavBar -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-[#0e0e0e] h-16 flex justify-between items-center px-8 w-full">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold bg-gradient-to-r from-[#8ff5ff] to-[#d674ff] bg-clip-text text-transparent font-['Space_Grotesk'] tracking-tight">EXTRACTOR.SYS</span>
+<nav class="hidden md:flex items-center gap-6 font-['Space_Grotesk'] tracking-tight">
+<a class="text-[#8ff5ff] border-b-2 border-[#8ff5ff] pb-1 cursor-pointer active:scale-95 transition-colors" href="#">Sessions</a>
+<a class="text-[#adaaaa] hover:text-[#8ff5ff] transition-colors cursor-pointer active:scale-95" href="#">Automation</a>
+<a class="text-[#adaaaa] hover:text-[#8ff5ff] transition-colors cursor-pointer active:scale-95" href="#">History</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2">
+<button class="p-2 text-[#adaaaa] hover:text-[#8ff5ff] transition-colors cursor-pointer active:scale-95">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-[#adaaaa] hover:text-[#8ff5ff] transition-colors cursor-pointer active:scale-95">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+<button class="signature-gradient text-on-primary-container px-5 py-2 rounded-lg font-headline font-bold text-sm tracking-tight cursor-pointer active:scale-95 transition-all neon-glow-primary">
+                Execute Extraction
+            </button>
+</div>
+</header>
+<div class="flex h-screen pt-16 overflow-hidden">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-16 bottom-0 w-64 bg-[#131313] flex flex-col py-6 font-['Space_Grotesk'] text-sm uppercase tracking-widest z-40">
+<div class="px-6 mb-8">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-surface-container-highest flex items-center justify-center border border-outline-variant/20">
+<span class="material-symbols-outlined text-primary text-lg">terminal</span>
+</div>
+<div>
+<div class="text-[#8ff5ff] font-bold">OPERATOR_01</div>
+<div class="text-[10px] text-on-surface-variant tracking-normal normal-case">Premium Access</div>
+</div>
+</div>
+</div>
+<div class="flex-1 space-y-1">
+<div class="px-3">
+<a class="flex items-center gap-4 px-4 py-3 text-[#adaaaa] hover:bg-[#201f1f] hover:text-[#8ff5ff] transition-all duration-200 ease-in-out group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">grid_view</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-[#8ff5ff] border-r-2 border-[#8ff5ff] bg-[#201f1f]/30 group" href="#">
+<span class="material-symbols-outlined">database</span>
+<span>Data Sources</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-[#adaaaa] hover:bg-[#201f1f] hover:text-[#8ff5ff] transition-all duration-200 ease-in-out group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">terminal</span>
+<span>Parsers</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-[#adaaaa] hover:bg-[#201f1f] hover:text-[#8ff5ff] transition-all duration-200 ease-in-out group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">ios_share</span>
+<span>Exports</span>
+</a>
+</div>
+<!-- Extraction Settings Section -->
+<div class="pt-8 px-6">
+<div class="text-[10px] text-on-surface-variant mb-4 font-bold">Extraction Config</div>
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<span class="normal-case tracking-normal text-on-surface-variant">Text OCR</span>
+<div class="w-8 h-4 bg-primary rounded-full relative cursor-pointer">
+<div class="absolute right-0.5 top-0.5 w-3 h-3 bg-on-primary-container rounded-full"></div>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<span class="normal-case tracking-normal text-on-surface-variant">Table Detect</span>
+<div class="w-8 h-4 bg-surface-container-highest rounded-full relative cursor-pointer">
+<div class="absolute left-0.5 top-0.5 w-3 h-3 bg-outline rounded-full"></div>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<span class="normal-case tracking-normal text-on-surface-variant">Image Extract</span>
+<div class="w-8 h-4 bg-primary rounded-full relative cursor-pointer">
+<div class="absolute right-0.5 top-0.5 w-3 h-3 bg-on-primary-container rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="px-3 mt-auto">
+<a class="flex items-center gap-4 px-4 py-3 text-[#adaaaa] hover:bg-[#201f1f] hover:text-[#8ff5ff] transition-all duration-200 ease-in-out group" href="#">
+<span class="material-symbols-outlined">help</span>
+<span>Docs</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-[#adaaaa] hover:bg-[#201f1f] hover:text-[#8ff5ff] transition-all duration-200 ease-in-out group" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span>Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Center Workspace -->
+<main class="flex-1 ml-64 mr-80 bg-background flex flex-col p-6 overflow-hidden">
+<!-- Canvas Header -->
+<div class="flex items-center justify-between mb-6">
+<div>
+<h1 class="text-2xl font-headline font-semibold text-on-surface">Precision_Workspace_04</h1>
+<p class="text-on-surface-variant text-sm mt-1">Status: <span class="text-primary font-mono">SCANNING_IN_PROGRESS</span></p>
+</div>
+<div class="flex items-center gap-2 bg-surface-container-low p-1 rounded-lg">
+<button class="px-3 py-1.5 rounded bg-surface-container-highest text-primary text-xs font-bold uppercase tracking-wider">Visual</button>
+<button class="px-3 py-1.5 rounded text-on-surface-variant text-xs font-bold uppercase tracking-wider hover:text-on-surface">Logic</button>
+</div>
+</div>
+<!-- Preview Area -->
+<div class="flex-1 bg-surface-container-low rounded-xl relative overflow-hidden group border border-outline-variant/10">
+<!-- Document Surface -->
+<div class="absolute inset-0 flex items-center justify-center p-12">
+<div class="relative max-w-full max-h-full aspect-[3/4] shadow-2xl overflow-hidden rounded-sm bg-white">
+<img alt="Financial statement document" class="w-full h-full object-cover opacity-90 mix-blend-multiply" data-alt="Detailed monochrome financial statement document with rows of numbers and charts on a clean paper background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_wCcZ8e1eY97tAHK1l6-ntiMLtirZeyzMctZZfSzVuL-j0rCBK257nq2wvna-4JfZyVt9v8pMeTgD3MHKPbTzJBNB6mCB2i95wpltT0OBFk1kbvxUom7nz5a8z8_7fy4l_e78X0t3zDbRSi3HtvsYV2hMWXE2Eq5KhbbF4SxtOlXyOcRYLjaXRXZjxQh4C-7us7q3kbtksvG1odTkaQ66t1TIx64n9WXW3sxyeLirHk1LzZ-U7lW-BnTeL7dqp_5IcIgoTp1Smog"/>
+<!-- Interactive Bounding Boxes -->
+<div class="absolute top-[10%] left-[10%] w-[40%] h-[5%] border-2 border-primary/60 bg-primary/10 cursor-pointer hover:bg-primary/20 transition-colors">
+<div class="absolute -top-6 left-0 bg-primary text-on-primary-container text-[9px] font-bold px-1 py-0.5 rounded-sm uppercase">Title_Field</div>
+</div>
+<div class="absolute top-[20%] left-[10%] w-[80%] h-[25%] border-2 border-secondary/60 bg-secondary/10 cursor-pointer hover:bg-secondary/20 transition-colors">
+<div class="absolute -top-6 left-0 bg-secondary text-on-secondary-container text-[9px] font-bold px-1 py-0.5 rounded-sm uppercase">Main_Table</div>
+</div>
+<div class="absolute top-[50%] left-[55%] w-[35%] h-[15%] border-2 border-primary/60 bg-primary/10 cursor-pointer hover:bg-primary/20 transition-colors">
+<div class="absolute -top-6 left-0 bg-primary text-on-primary-container text-[9px] font-bold px-1 py-0.5 rounded-sm uppercase">Signature_Zone</div>
+</div>
+<!-- Scanning Line Effect -->
+<div class="absolute left-0 right-0 h-0.5 bg-primary/50 shadow-[0_0_15px_#8ff5ff] top-1/2 animate-scan pointer-events-none"></div>
+</div>
+</div>
+<!-- Floating Toolbar -->
+<div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-1 p-1 bg-surface-container-highest/80 backdrop-blur-md rounded-full border border-outline-variant/20">
+<button class="p-2 hover:bg-primary/20 hover:text-primary rounded-full transition-colors">
+<span class="material-symbols-outlined">zoom_in</span>
+</button>
+<button class="p-2 hover:bg-primary/20 hover:text-primary rounded-full transition-colors">
+<span class="material-symbols-outlined">zoom_out</span>
+</button>
+<div class="w-px h-4 bg-outline-variant mx-2"></div>
+<button class="p-2 hover:bg-primary/20 hover:text-primary rounded-full transition-colors">
+<span class="material-symbols-outlined text-secondary">crop</span>
+</button>
+<button class="p-2 hover:bg-primary/20 hover:text-primary rounded-full transition-colors">
+<span class="material-symbols-outlined">format_shapes</span>
+</button>
+<div class="w-px h-4 bg-outline-variant mx-2"></div>
+<button class="p-2 hover:bg-primary/20 hover:text-primary rounded-full transition-colors">
+<span class="material-symbols-outlined">refresh</span>
+</button>
+</div>
+</div>
+</main>
+<!-- Right Panel: Results -->
+<aside class="fixed right-0 top-16 bottom-0 w-80 bg-surface-container-low flex flex-col border-l border-outline-variant/10 z-40">
+<div class="p-6">
+<div class="flex items-center justify-between mb-6">
+<h2 class="text-sm font-headline font-bold uppercase tracking-widest text-on-surface-variant">Live_Results</h2>
+<span class="bg-primary/10 text-primary text-[10px] px-2 py-1 rounded-sm font-mono">98.4% CONF</span>
+</div>
+<div class="space-y-4 flex-1 overflow-y-auto">
+<!-- Result Card 1 -->
+<div class="bg-surface-container-high p-4 rounded-lg group hover:bg-surface-bright transition-colors">
+<div class="flex justify-between items-start mb-2">
+<span class="text-[10px] font-bold text-primary font-mono">FIELD_ID: 0x921</span>
+<span class="material-symbols-outlined text-xs text-on-surface-variant cursor-pointer">edit</span>
+</div>
+<div class="text-xs text-on-surface-variant leading-relaxed mb-3">
+                            Extracted Value:
+                        </div>
+<div class="bg-surface-container-lowest p-2 rounded font-mono text-xs text-[#8ff5ff] border-l-2 border-primary">
+                            "Invoice Number: INV-2024-001"
+                        </div>
+</div>
+<!-- Result Card 2 -->
+<div class="bg-surface-container-high p-4 rounded-lg group hover:bg-surface-bright transition-colors">
+<div class="flex justify-between items-start mb-2">
+<span class="text-[10px] font-bold text-secondary font-mono">FIELD_ID: 0x44B</span>
+<span class="material-symbols-outlined text-xs text-on-surface-variant cursor-pointer">edit</span>
+</div>
+<div class="text-xs text-on-surface-variant leading-relaxed mb-3">
+                            Extracted Value:
+                        </div>
+<div class="bg-surface-container-lowest p-2 rounded font-mono text-xs text-[#d674ff] border-l-2 border-secondary">
+                            "Total Amount: $12,450.00"
+                        </div>
+</div>
+<!-- Result Card 3 (Table) -->
+<div class="bg-surface-container-high p-4 rounded-lg group hover:bg-surface-bright transition-colors">
+<div class="flex justify-between items-start mb-2">
+<span class="text-[10px] font-bold text-primary font-mono">TABLE_STRUCT: 0x01</span>
+<span class="material-symbols-outlined text-xs text-on-surface-variant cursor-pointer">fullscreen</span>
+</div>
+<div class="text-xs text-on-surface-variant leading-relaxed mb-2">
+                            Detected 5 rows, 3 cols
+                        </div>
+<div class="overflow-hidden rounded border border-outline-variant/10">
+<table class="w-full text-[10px] text-left">
+<thead class="bg-surface-container-highest">
+<tr>
+<th class="p-1.5 text-on-surface-variant font-bold">Qty</th>
+<th class="p-1.5 text-on-surface-variant font-bold">Desc</th>
+</tr>
+</thead>
+<tbody>
+<tr class="border-t border-outline-variant/10">
+<td class="p-1.5 font-mono">01</td>
+<td class="p-1.5 text-primary">Micro_Service</td>
+</tr>
+<tr class="border-t border-outline-variant/10">
+<td class="p-1.5 font-mono">04</td>
+<td class="p-1.5 text-primary">Data_Nodes</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<!-- Export Section -->
+<div class="mt-auto p-6 bg-surface-container-lowest/50 backdrop-blur-sm border-t border-outline-variant/10">
+<div class="text-[10px] text-on-surface-variant mb-4 uppercase font-bold tracking-widest">Output Package</div>
+<div class="grid grid-cols-3 gap-2 mb-4">
+<button class="flex flex-col items-center gap-1.5 p-2 rounded bg-surface-container-high hover:bg-primary/10 hover:text-primary transition-all group">
+<span class="material-symbols-outlined text-lg">description</span>
+<span class="text-[9px] font-bold">JSON</span>
+</button>
+<button class="flex flex-col items-center gap-1.5 p-2 rounded bg-surface-container-high hover:bg-primary/10 hover:text-primary transition-all group">
+<span class="material-symbols-outlined text-lg">table_chart</span>
+<span class="text-[9px] font-bold">CSV</span>
+</button>
+<button class="flex flex-col items-center gap-1.5 p-2 rounded bg-surface-container-high hover:bg-primary/10 hover:text-primary transition-all group">
+<span class="material-symbols-outlined text-lg">article</span>
+<span class="text-[9px] font-bold">EXCEL</span>
+</button>
+</div>
+<button class="w-full py-3 bg-primary text-on-primary-container font-headline font-extrabold text-xs uppercase tracking-[0.2em] rounded-lg neon-glow-primary active:scale-[0.98] transition-all">
+                    Finalize &amp; Export
+                </button>
+</div>
+</aside>
+</div>
+<style>
+        @keyframes scan {
+            0% { top: 10%; opacity: 0; }
+            5% { opacity: 1; }
+            95% { opacity: 1; }
+            100% { top: 90%; opacity: 0; }
+        }
+        .animate-scan {
+            animation: scan 4s linear infinite;
+        }
+    </style>
+</body></html>

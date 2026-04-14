@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>EXTRACTOR.IO - Neural Data Engine</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Manrope:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-surface": "#fcf9f8",
+                    "on-secondary": "#390050",
+                    "error": "#ff716c",
+                    "primary-fixed-dim": "#00deec",
+                    "on-tertiary": "#002e52",
+                    "surface": "#0e0e0e",
+                    "surface-container-highest": "#262626",
+                    "inverse-primary": "#006a71",
+                    "on-secondary-container": "#fff5fc",
+                    "surface-container-high": "#201f1f",
+                    "on-error": "#490006",
+                    "surface-container": "#1a1919",
+                    "on-surface": "#ffffff",
+                    "primary": "#8ff5ff",
+                    "secondary-fixed": "#f1c1ff",
+                    "secondary-dim": "#bb00fc",
+                    "tertiary-fixed-dim": "#51a7fe",
+                    "error-container": "#9f0519",
+                    "on-tertiary-fixed": "#001930",
+                    "primary-fixed": "#00eefc",
+                    "tertiary-fixed": "#72b5ff",
+                    "inverse-on-surface": "#565555",
+                    "error-dim": "#d7383b",
+                    "tertiary": "#65afff",
+                    "secondary-fixed-dim": "#eaaeff",
+                    "outline": "#767575",
+                    "background": "#0e0e0e",
+                    "on-surface-variant": "#adaaaa",
+                    "surface-variant": "#262626",
+                    "secondary": "#d674ff",
+                    "surface-container-lowest": "#000000",
+                    "surface-container-low": "#131313",
+                    "on-background": "#ffffff",
+                    "on-tertiary-container": "#00213e",
+                    "tertiary-dim": "#4aa2f9",
+                    "on-primary-container": "#005359",
+                    "surface-tint": "#8ff5ff",
+                    "primary-dim": "#00deec",
+                    "secondary-container": "#9900cf",
+                    "on-primary": "#005d63",
+                    "primary-container": "#00eefc",
+                    "outline-variant": "#484847",
+                    "on-primary-fixed-variant": "#005e64",
+                    "on-tertiary-fixed-variant": "#003b68",
+                    "on-primary-fixed": "#003f43",
+                    "surface-bright": "#2c2c2c",
+                    "on-secondary-fixed": "#580079",
+                    "surface-dim": "#0e0e0e",
+                    "on-error-container": "#ffa8a3",
+                    "on-secondary-fixed-variant": "#8400b3",
+                    "tertiary-container": "#4aa2f9"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Manrope"],
+                    "label": ["Manrope"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .neon-glow {
+            box-shadow: 0 0 20px rgba(143, 245, 255, 0.15);
+        }
+        .scanning-line {
+            background: linear-gradient(to bottom, transparent, #8ff5ff, transparent);
+            height: 100px;
+            width: 100%;
+            position: absolute;
+            top: -100px;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body selection:bg-primary/30">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#131313] flex justify-between items-center px-6 py-4 w-full">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-cyan-400 dark:text-[#8ff5ff]" data-icon="terminal">terminal</span>
+<h1 class="text-xl font-bold tracking-tighter bg-gradient-to-r from-[#8ff5ff] to-[#d674ff] bg-clip-text text-transparent font-headline">EXTRACTOR.IO</h1>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden md:flex items-center gap-8 mr-8">
+<a class="font-headline tracking-tight text-[#8ff5ff] transition-colors" href="#">Dashboard</a>
+<a class="font-headline tracking-tight text-[#adaaaa] hover:bg-[#2c2c2c] transition-colors px-2 py-1 rounded" href="#">History</a>
+<a class="font-headline tracking-tight text-[#adaaaa] hover:bg-[#2c2c2c] transition-colors px-2 py-1 rounded" href="#">Templates</a>
+</div>
+<div class="cursor-pointer active:scale-95 transition-transform">
+<div class="w-10 h-10 rounded-full border border-primary/20 bg-surface-container-high overflow-hidden">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="Close up portrait of a digital avatar with neon highlights and futuristic aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDN2Od36va8xP-XsKwBuGQOcqKnUdO6Vvhd5ZJqOlMyj2yM6whrz82ckVK2FbK4qmmwYfA-Dl0a1Rr-x5LJTULlFwzBuwMM3l0d_sPoUijbq3oWkb60UQ3qFDj4LHi1y21i_tkVkuk-O2pSqVBxl-JSd82PKUsxYZKK54bMuT4dANO7rfqjDgk8-ddwDzlZP2N4aUJZqZsHMWcdvRpjLuhMU8T-UjDKl3_AiR5VykUFCkjU0UCXXIJSFb7oEELvF9_xUB0qWkHdSbs"/>
+</div>
+</div>
+</div>
+</header>
+<!-- NavigationDrawer (Desktop Only) -->
+<aside class="hidden lg:flex fixed inset-y-0 left-0 z-40 h-full w-72 rounded-r-none bg-[#131313] border-r border-[#8ff5ff]/10 flex-col pt-24 pb-8 px-4 shadow-[20px_0_40px_rgba(143,245,255,0.05)]">
+<div class="mb-10 px-4 flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="memory">memory</span>
+</div>
+<div>
+<p class="font-headline text-[#8ff5ff] font-bold">Neural Engine</p>
+<p class="font-label text-[10px] uppercase tracking-widest text-primary/60">Status: Active</p>
+</div>
+</div>
+<nav class="flex-1 space-y-2">
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg bg-gradient-to-r from-[#8ff5ff]/10 to-transparent text-[#8ff5ff] font-bold border-l-2 border-[#8ff5ff] duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+<span class="font-['Manrope'] text-sm uppercase tracking-widest">Dashboard</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-[#adaaaa] hover:text-white hover:bg-[#201f1f] duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span class="font-['Manrope'] text-sm uppercase tracking-widest">History</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-[#adaaaa] hover:text-white hover:bg-[#201f1f] duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="rebase_edit">rebase_edit</span>
+<span class="font-['Manrope'] text-sm uppercase tracking-widest">Templates</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-[#adaaaa] hover:text-white hover:bg-[#201f1f] duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-['Manrope'] text-sm uppercase tracking-widest">Settings</span>
+</a>
+</nav>
+<div class="mt-auto p-4 bg-surface-container-high/50 rounded-xl border border-outline-variant/10">
+<div class="flex justify-between items-center mb-2">
+<span class="text-[10px] uppercase tracking-widest text-on-surface-variant">Credits Left</span>
+<span class="text-[10px] font-bold text-secondary">84%</span>
+</div>
+<div class="h-1 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full w-[84%] bg-gradient-to-r from-primary to-secondary"></div>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="lg:ml-72 min-h-screen pt-24 pb-24 px-6 md:px-12 flex flex-col items-center justify-center relative overflow-hidden">
+<!-- Abstract Background Decorative Elements -->
+<div class="absolute top-1/4 -right-20 w-96 h-96 bg-primary/5 blur-[120px] rounded-full pointer-events-none"></div>
+<div class="absolute bottom-1/4 -left-20 w-80 h-80 bg-secondary/5 blur-[100px] rounded-full pointer-events-none"></div>
+<div class="w-full max-w-4xl space-y-12 relative z-10">
+<!-- Hero Header -->
+<div class="text-center space-y-4">
+<h2 class="text-5xl md:text-7xl font-headline font-bold tracking-tight text-white mb-4">
+                    Neural <span class="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Extraction</span>
+</h2>
+<p class="text-on-surface-variant text-lg max-w-2xl mx-auto">
+                    Advanced OCR engine optimized for structured data recovery from PDFs and high-resolution imagery.
+                </p>
+</div>
+<!-- Bento Grid Layout for Upload & Info -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Main Upload Zone -->
+<div class="md:col-span-2 group relative">
+<div class="absolute -inset-0.5 bg-gradient-to-r from-primary/30 to-secondary/30 rounded-full blur opacity-30 group-hover:opacity-100 transition duration-1000"></div>
+<div class="relative h-96 flex flex-col items-center justify-center border-2 border-dashed border-primary/20 bg-surface-container-low rounded-full transition-all duration-300 hover:bg-surface-container cursor-pointer group-hover:border-primary/50 overflow-hidden">
+<div class="scanning-line"></div>
+<div class="bg-surface-container-high p-8 rounded-full mb-6 neon-glow border border-primary/10">
+<span class="material-symbols-outlined text-5xl text-primary" data-icon="upload_file">upload_file</span>
+</div>
+<div class="text-center">
+<h3 class="text-2xl font-headline font-semibold text-white mb-2">Tap to Upload</h3>
+<p class="text-on-surface-variant font-label text-xs uppercase tracking-[0.2em]">or drag &amp; drop assets</p>
+</div>
+<div class="mt-8 flex gap-3">
+<div class="px-4 py-1.5 rounded-full bg-surface-container-highest border border-outline-variant/10 text-[10px] font-bold text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="picture_as_pdf">picture_as_pdf</span> PDF
+                            </div>
+<div class="px-4 py-1.5 rounded-full bg-surface-container-highest border border-outline-variant/10 text-[10px] font-bold text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="image">image</span> JPG/PNG
+                            </div>
+</div>
+</div>
+</div>
+<!-- Secondary Info Panel -->
+<div class="space-y-6">
+<!-- Recent Files -->
+<div class="bg-surface-container-low p-6 rounded-xl border-l border-primary/20 flex-1">
+<h4 class="text-xs font-label uppercase tracking-widest text-primary mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="schedule">schedule</span> Recent Tasks
+                        </h4>
+<div class="space-y-4">
+<div class="flex items-center gap-3 group cursor-pointer">
+<div class="w-8 h-8 rounded bg-surface-container-high flex items-center justify-center text-on-surface-variant group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="description">description</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-medium truncate">invoice_2024_Q1.pdf</p>
+<p class="text-[10px] text-on-surface-variant">2.4 MB • 4 mins ago</p>
+</div>
+</div>
+<div class="flex items-center gap-3 group cursor-pointer">
+<div class="w-8 h-8 rounded bg-surface-container-high flex items-center justify-center text-on-surface-variant group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="receipt_long">receipt_long</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-medium truncate">tax_form_8802.pdf</p>
+<p class="text-[10px] text-on-surface-variant">1.1 MB • 1 hour ago</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Precision Stats -->
+<div class="bg-surface-container-low p-6 rounded-xl border-l border-secondary/20">
+<div class="flex justify-between items-start mb-6">
+<div class="w-10 h-10 rounded bg-secondary/10 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" data-icon="bolt">bolt</span>
+</div>
+<span class="px-2 py-0.5 rounded bg-secondary/10 text-secondary text-[8px] font-bold uppercase tracking-tighter">Hyper-Mode</span>
+</div>
+<p class="text-4xl font-headline font-bold text-white mb-1 tracking-tighter">99.8%</p>
+<p class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant">Extraction Accuracy</p>
+</div>
+</div>
+</div>
+<!-- Footer Action Bar -->
+<div class="flex flex-wrap justify-between items-center pt-8 border-t border-outline-variant/10">
+<div class="flex gap-12">
+<div>
+<p class="text-2xl font-headline font-bold text-white">4.2M</p>
+<p class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant">Tokens Processed</p>
+</div>
+<div>
+<p class="text-2xl font-headline font-bold text-white">12ms</p>
+<p class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant">Avg Latency</p>
+</div>
+</div>
+<div class="flex gap-4">
+<button class="px-6 py-2 rounded-lg bg-surface-container-highest text-on-surface text-sm font-medium hover:bg-surface-bright transition-all active:scale-95 flex items-center gap-2">
+<span class="material-symbols-outlined text-lg" data-icon="auto_awesome">auto_awesome</span>
+                        Advanced Options
+                    </button>
+<button class="px-8 py-2 rounded-lg bg-gradient-to-r from-primary to-secondary text-on-primary text-sm font-bold shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all active:scale-95 flex items-center gap-2">
+                        Batch Upload
+                        <span class="material-symbols-outlined text-lg" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 bg-[#0e0e0e]/80 backdrop-blur-xl flex justify-around items-center h-16 px-4 border-t border-[#8ff5ff]/10">
+<a class="flex flex-col items-center justify-center text-[#8ff5ff] drop-shadow-[0_0_8px_rgba(143,245,255,0.6)] active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="upload_file">upload_file</span>
+<span class="font-['Space_Grotesk'] text-[10px]">Upload</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#adaaaa] hover:text-[#d674ff] active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-['Space_Grotesk'] text-[10px]">Analyze</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#adaaaa] hover:text-[#d674ff] active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="database">database</span>
+<span class="font-['Space_Grotesk'] text-[10px]">Archive</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#adaaaa] hover:text-[#d674ff] active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="ios_share">ios_share</span>
+<span class="font-['Space_Grotesk'] text-[10px]">Export</span>
+</a>
+</nav>
+<!-- Visual Polish: Noise Texture Overlay -->
+<div class="fixed inset-0 pointer-events-none opacity-[0.03] mix-blend-overlay">
+<svg viewbox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+<filter id="noise">
+<feturbulence basefrequency="0.65" numoctaves="3" stitchtiles="stitch" type="fractalNoise"></feturbulence>
+</filter>
+<rect filter="url(#noise)" height="100%" width="100%"></rect>
+</svg>
+</div>
+</body></html>
