@@ -1,19 +1,15 @@
-import path from 'node:path'
+import chromiumPack from '@sparticuz/chromium'
+import { chromium as playwrightChromium } from 'playwright-core'
 
 export async function launchBrowser() {
   const isVercel = Boolean(process.env.VERCEL)
 
   if (isVercel) {
-    const chromiumPack = await import('@sparticuz/chromium')
-    const { chromium } = await import('playwright-core')
+    chromiumPack.setGraphicsMode = false
 
-    const executablePath = await chromiumPack.default.executablePath()
-    process.env.LD_LIBRARY_PATH = path.dirname(executablePath)
-    chromiumPack.default.setGraphicsMode = false
-
-    return chromium.launch({
-      args: chromiumPack.default.args,
-      executablePath,
+    return playwrightChromium.launch({
+      args: chromiumPack.args,
+      executablePath: await chromiumPack.executablePath(),
       headless: true
     })
   }
