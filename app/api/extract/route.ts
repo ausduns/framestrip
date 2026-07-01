@@ -1,9 +1,10 @@
 import JSZip from 'jszip'
-import { chromium } from 'playwright'
 import { NextResponse } from 'next/server'
 import { cleanHTML } from '@/lib/clean'
+import { launchBrowser } from '@/lib/browser'
 
 export const runtime = 'nodejs'
+export const maxDuration = 60
 
 export async function POST(req: Request) {
   let url: string | null = null
@@ -29,7 +30,7 @@ export async function POST(req: Request) {
 
   const sourceLabel = url ? safeFilename(fromUrlToName(url)) : safeFilename(uploadedName ?? 'uploaded')
 
-  const browser = await chromium.launch()
+  const browser = await launchBrowser()
   try {
     const page = await browser.newPage()
 
