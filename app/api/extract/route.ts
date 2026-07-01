@@ -30,8 +30,9 @@ export async function POST(req: Request) {
 
   const sourceLabel = url ? safeFilename(fromUrlToName(url)) : safeFilename(uploadedName ?? 'uploaded')
 
-  const browser = await launchBrowser()
+  let browser: Awaited<ReturnType<typeof launchBrowser>> | null = null
   try {
+    browser = await launchBrowser()
     const page = await browser.newPage()
 
     if (url) {
@@ -88,7 +89,7 @@ export async function POST(req: Request) {
     const message = e instanceof Error ? e.message : 'Extraction failed'
     return new NextResponse(message, { status: 500 })
   } finally {
-    await browser.close()
+    await browser?.close().catch(() => {})
   }
 }
 
