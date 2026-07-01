@@ -7,9 +7,17 @@ export async function launchBrowser() {
   if (isVercel) {
     chromiumPack.setGraphicsMode = false
 
+    const executablePath = await chromiumPack.executablePath()
+    const libPath = '/tmp/al2023/lib'
+    if (!process.env.LD_LIBRARY_PATH?.split(':').includes(libPath)) {
+      process.env.LD_LIBRARY_PATH = process.env.LD_LIBRARY_PATH
+        ? `${libPath}:${process.env.LD_LIBRARY_PATH}`
+        : libPath
+    }
+
     return playwrightChromium.launch({
       args: chromiumPack.args,
-      executablePath: await chromiumPack.executablePath(),
+      executablePath,
       headless: true
     })
   }
